@@ -41,7 +41,7 @@ public class AgilityTrainer extends PollingScript<ClientContext> implements Mess
             new Tile(3005, 10360, 0), new Tile(3003, 10362, 0)
     };
 
-    private static final int[] FOOD_ID = {379, 365, 329, 373};
+    private static final int[] FOOD_ID = {379, 365, 329, 373, 385, 473, 7946, 15272};
 
 
     public Course[] Courses = {
@@ -77,9 +77,9 @@ public class AgilityTrainer extends PollingScript<ClientContext> implements Mess
                             new Tile(2551, 3549, 0), new Tile(2552, 3549, 0)),
                     new Obstacle("Walk-across", "Log balance", 43595, LOG_BALANCE_BOUNDS,
                             new FAIL(true,
-                                    "",
-                                    "",
-                                    "",
+                                    "you walk carefully across the slippery log",
+                                    "you lose your footing and fall into the water",
+                                    "and make it safely to the other side",
                                     new Obstacle("Walk-across", "Log balance", 43595, LOG_BALANCE_BOUNDS, new FAIL(false), new Tile(2548, 3551, 0))),
                             new Tile(2539, 3545, 0), new Tile(2539, 3546, 0), new Tile(2539, 3547, 0),
                             new Tile(2540, 3545, 0), new Tile(2540, 3546, 0), new Tile(2540, 3547, 0),
@@ -89,9 +89,9 @@ public class AgilityTrainer extends PollingScript<ClientContext> implements Mess
                             new Tile(2537, 3546, 1)),
                     new Obstacle("Walk-across", "Balancing ledge", 2302, BASE_BOUNDS,
                             new FAIL(true,
-                                    "",
-                                    "",
-                                    "",
+                                    "you put your foot on the ledge and try to edge across",
+                                    "you slip and fall onto the spikes below",
+                                    "you skilfully edge across the gap",
                                     new Obstacle("Climb over", "Obstacle net", 20211, OBSTACLE_NET_BOUNDS, new FAIL(false), new Tile(2537, 3546, 1))),
                             new Tile(2532, 3546, 1)),
                     new Obstacle("Climb-down", "Ladder", 3205, BASE_BOUNDS,
@@ -138,7 +138,9 @@ public class AgilityTrainer extends PollingScript<ClientContext> implements Mess
                             new Tile(2993, 3935, 0))
 
 
-                    )
+                    ),
+            new Course("Advanced Barbarian Outpost",
+                    new Tile(2496, 3496, 0), 90, 5000)
     };
 
     public Course current_course;
@@ -225,8 +227,8 @@ public class AgilityTrainer extends PollingScript<ClientContext> implements Mess
             }
         }
         final int totalXP = myStats.experience(SKILLS_AGILITY) - startXP;
-        final int XPHr = (int) ((totalXP * 3600000D) / getRuntime());
-        final int lapsHr = (int) ((laps * 3600000D) / getRuntime());
+        final int XPHr = (int) ((totalXP * 3600000D) / getTotalRuntime());
+        final int lapsHr = (int) ((laps * 3600000D) / getTotalRuntime());
         long time_til_next = 0;
         final int xp_left = (myStats.experienceAt(next_course_level) - myStats.experience(SKILLS_AGILITY));
         if(XPHr > 0) {
@@ -318,7 +320,7 @@ public class AgilityTrainer extends PollingScript<ClientContext> implements Mess
                 return;
             }
             if (!wilderness_ladder.inViewport()) {
-                ctx.camera.turnTo(wilderness_ladder);
+                ctx.camera.turnTo(wilderness_ladder, Random.nextInt(-45, 45));
             }
             wilderness_ladder.bounds(Ladder.bounds);
             wilderness_ladder.interact(Ladder.action, wilderness_ladder.name());
@@ -337,8 +339,7 @@ public class AgilityTrainer extends PollingScript<ClientContext> implements Mess
                 if(!obstacle.valid()){
                     return;
                 }
-
-                ctx.camera.turnTo(obstacle);
+                ctx.camera.turnTo(obstacle, Random.nextInt(-45,45));
                 obstacle.bounds(current_course.actions[current_course.current_action].canFail.failObstacle.bounds);
                 obstacle.interact(current_course.actions[current_course.current_action].canFail.failObstacle.action, obstacle.name());
 
@@ -364,8 +365,7 @@ public class AgilityTrainer extends PollingScript<ClientContext> implements Mess
                 if(!obstacle.valid()){
                     return;
                 }
-                ctx.camera.turnTo(obstacle);
-
+                ctx.camera.turnTo(obstacle, Random.nextInt(-45,45));
                 if(obstacle.name().equalsIgnoreCase("log balance") && current_course.name.equalsIgnoreCase("Wilderness")){
                     ctx.camera.pitch(Random.nextInt(30, 40));
                 }
@@ -395,7 +395,7 @@ public class AgilityTrainer extends PollingScript<ClientContext> implements Mess
             if(!obstacle.valid()){
                 return;
             }
-            ctx.camera.turnTo(obstacle);
+            ctx.camera.turnTo(obstacle, Random.nextInt(-45,45));
             obstacle.bounds(current_course.actions[current_course.current_action].bounds);
             obstacle.interact(current_course.actions[current_course.current_action].action, obstacle.name());
 
