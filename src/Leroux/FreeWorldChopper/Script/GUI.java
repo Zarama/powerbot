@@ -1,20 +1,33 @@
 package Leroux.FreeWorldChopper.Script;
 
-import Leroux.FreeWorldChopper.Contants.Areas;
-import Leroux.FreeWorldChopper.Contants.Paths;
-import Leroux.FreeWorldChopper.Enums.Bankers;
-import Leroux.FreeWorldChopper.Enums.Trees;
-import Leroux.FreeWorldChopper.WoodCutting.Tasks.*;
-import Leroux.FreeWorldChopper.WoodCutting.Wrapper.WoodCutting;
-import org.powerbot.script.rt6.ClientContext;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import Leroux.FreeWorldChopper.Contants.Areas;
+import Leroux.FreeWorldChopper.Contants.Paths;
+import Leroux.FreeWorldChopper.Enums.Bankers;
+import Leroux.FreeWorldChopper.Enums.Trees;
+import Leroux.FreeWorldChopper.WoodCutting.Tasks.Chop;
+import Leroux.FreeWorldChopper.WoodCutting.Tasks.Deposit;
+import Leroux.FreeWorldChopper.WoodCutting.Tasks.Drop;
+import Leroux.FreeWorldChopper.WoodCutting.Tasks.PowerChop;
+import Leroux.FreeWorldChopper.WoodCutting.Tasks.WalkToBank;
+import Leroux.FreeWorldChopper.WoodCutting.Tasks.WalkToSpot;
+import Leroux.FreeWorldChopper.WoodCutting.Wrapper.WoodCutting;
+import org.powerbot.script.rt6.ClientContext;
 
 public class GUI extends JFrame {
 
@@ -46,8 +59,8 @@ public class GUI extends JFrame {
         toTrain.setBounds(187, 37, 76, 14);
         panel.add(toTrain);
 
-        final JComboBox<String> treeBox = new JComboBox<String>();
-        treeBox.setModel(new DefaultComboBoxModel<String>(new String[]{"Trees", "Normal", "Oak", "Willow"}));
+        final JComboBox treeBox = new JComboBox();
+        treeBox.setModel(new DefaultComboBoxModel(new String[]{"Trees", "Normal", "Oak", "Willow"}));
         treeBox.setBounds(175, 56, 100, 20);
         panel.add(treeBox);
 
@@ -61,9 +74,9 @@ public class GUI extends JFrame {
         optionLabel1.setBounds(187, 85, 100, 14);
         panel.add(optionLabel1);
 
-        final JComboBox<String> optionBox1 = new JComboBox<String>();
+        final JComboBox optionBox1 = new JComboBox();
         optionBox1.setVisible(false);
-        optionBox1.setModel(new DefaultComboBoxModel<String>(new String[]{"Example", "Options"}));
+        optionBox1.setModel(new DefaultComboBoxModel(new String[]{"Example", "Options"}));
         optionBox1.setBounds(175, 105, 89, 20);
         panel.add(optionBox1);
 
@@ -72,9 +85,9 @@ public class GUI extends JFrame {
         optionLabel3.setBounds(275, 85, 100, 14);
         panel.add(optionLabel3);
 
-        final JComboBox<String> optionBox3 = new JComboBox<String>();
+        final JComboBox optionBox3 = new JComboBox();
         optionBox3.setVisible(false);
-        optionBox3.setModel(new DefaultComboBoxModel<String>(new String[]{"Example", "Options"}));
+        optionBox3.setModel(new DefaultComboBoxModel(new String[]{"Example", "Options"}));
         optionBox3.setBounds(275, 105, 89, 20);
         panel.add(optionBox3);
 
@@ -155,7 +168,7 @@ public class GUI extends JFrame {
                     optionLabel1.setVisible(true);
                     optionLabel1.setText("Method");
                     optionBox1.setVisible(true);
-                    optionBox1.setModel(new DefaultComboBoxModel<String>(new String[]{"Bank", "Drop"}));
+                    optionBox1.setModel(new DefaultComboBoxModel(new String[]{"Bank", "Drop"}));
 
 
                     chkBox1.setVisible(false);
@@ -177,7 +190,7 @@ public class GUI extends JFrame {
                         optionLabel3.setVisible(true);
                         optionLabel3.setText("Location");
                         optionBox3.setVisible(true);
-                        optionBox3.setModel(new DefaultComboBoxModel<String>(new String[]{"Varrock East", "Varrock West"}));
+                        optionBox3.setModel(new DefaultComboBoxModel(new String[]{"Varrock East", "Varrock West"}));
                         infoMessage.setText("Cutting Oak Trees Outside Varrock, Banking at Varrock West Bank.");
                     } else {
                         infoMessage.setText("Start Near Oak Trees");
@@ -278,6 +291,7 @@ public class GUI extends JFrame {
         );
     }
 
+    @SuppressWarnings("unchecked")
     public void addTasks(boolean bank) {
         if (bank) {
             WoodCutting.setBoothIDs(Bankers.BOOTHS.getBoothIDs());

@@ -1,15 +1,24 @@
 package sd8z.scripts.sbonfire.util;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
 import org.powerbot.script.Tile;
 import org.powerbot.script.rt6.ClientContext;
 import org.powerbot.script.rt6.Constants;
 import sd8z.scripts.sbonfire.SBonfire;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
 
@@ -36,7 +45,7 @@ public class GUI extends JFrame {
         lblNewLabel.setBounds(10, 11, 197, 14);
         contentPane.add(lblNewLabel);
 
-        final JComboBox<Log> cmbLog = new JComboBox<Log>(Log.values());
+        final JComboBox cmbLog = new JComboBox(Log.values());
         cmbLog.setBounds(76, 36, 131, 20);
         contentPane.add(cmbLog);
 

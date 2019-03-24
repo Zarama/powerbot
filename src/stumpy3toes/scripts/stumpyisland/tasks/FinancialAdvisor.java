@@ -15,10 +15,10 @@ public class FinancialAdvisor extends StumpyIslandTask {
     private static final int BANKER_NPC_ID = 3318;
     private static final Tile BANKER_TILE = new Tile(3120, 3123);
 
-    private static final int POLL_BOOTH_OBJECT_ID = 26801;
+    private static final int[] POLL_BOOTH_OBJECT_ID = {26801,26815};
     private static final int POLL_BOOTH_HISTORY_INTERFACE_WIDGET_ID = 310;
-    private static final int POLL_BOOTH_INTERFACE_WIDGET_ID = 345;
-    private static final int POLL_BOOTH_INTERFACE_MAIN_COMPONENT_ID = 1;
+    //private static final int POLL_BOOTH_INTERFACE_WIDGET_ID = 345;
+    private static final int POLL_BOOTH_INTERFACE_MAIN_COMPONENT_ID = 2;
     private static final int POLL_BOOTH_CLOSE_BUTTON_COMPONENT_ID = 11;
 
     private static final int DOOR_OBJECT_ID = 9721;
@@ -60,13 +60,15 @@ public class FinancialAdvisor extends StumpyIslandTask {
                     ctx.bank.close();
                 } else if (!pollBoothOpen()) {
                     setStatus("Viewing poll booth");
-                    if (ctx.objects.object(POLL_BOOTH_OBJECT_ID).walkingInteraction("Use", ctx.checks.idle)) {
+                    if (ctx.objects.select(6).id(POLL_BOOTH_OBJECT_ID).poll().interact("Use")) {
                         Condition.wait(new Callable<Boolean>() {
                             @Override
                             public Boolean call() throws Exception {
                                 return ctx.chat.canContinue();
                             }
                         }, 250, 6);
+                    } else {
+                        ctx.movement.findPath(ctx.objects.select().id(POLL_BOOTH_OBJECT_ID).nearest().poll()).traverse();
                     }
                 }
                 break;
@@ -98,10 +100,11 @@ public class FinancialAdvisor extends StumpyIslandTask {
     }
 
     private Component pollBoothCloseButton() {
-        Widget widget = ctx.widgets.widget(POLL_BOOTH_INTERFACE_WIDGET_ID);
-        if (!widget.valid()) {
+        Widget widget;
+        if (ctx.widgets.widget(POLL_BOOTH_HISTORY_INTERFACE_WIDGET_ID).valid())
             widget = ctx.widgets.widget(POLL_BOOTH_HISTORY_INTERFACE_WIDGET_ID);
-        }
+        else
+            widget = ctx.widgets.widget(345);
         return widget.component(POLL_BOOTH_INTERFACE_MAIN_COMPONENT_ID).component(POLL_BOOTH_CLOSE_BUTTON_COMPONENT_ID);
     }
 

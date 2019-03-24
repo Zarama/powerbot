@@ -1,19 +1,26 @@
 package Leroux.NewbHonies.script;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import Leroux.NewbHonies.constants.InvItems;
 import Leroux.NewbHonies.tasks.Deposit;
 import Leroux.NewbHonies.tasks.GrabHonies;
 import Leroux.NewbHonies.tasks.Move_ToBank;
 import Leroux.NewbHonies.tasks.Move_ToField;
-import org.powerbot.script.*;
+import org.powerbot.script.MessageEvent;
+import org.powerbot.script.MessageListener;
+import org.powerbot.script.PaintListener;
+import org.powerbot.script.PollingScript;
+import org.powerbot.script.Script;
 import org.powerbot.script.rt6.ClientContext;
 import org.powerbot.script.rt6.GeItem;
 import org.powerbot.script.rt6.Item;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Script.Manifest(name = "Newb Honies", description = "Collects HoneyComb in Seers Village.", properties = "client=6;topic=1265445;author=Leroux;")
 
@@ -46,6 +53,7 @@ public class NewbHonies extends PollingScript<ClientContext> implements PaintLis
 			System.out.print(" Tasks Added ");
 		}
 
+		//noinspection deprecation
 		honeyPrice = GeItem.price(items.getHoney());
 		initialTime = System.currentTimeMillis();
 		System.out.print(" " + honeyPrice);

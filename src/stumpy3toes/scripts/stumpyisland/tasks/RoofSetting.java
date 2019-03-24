@@ -17,7 +17,7 @@ public class RoofSetting extends Task {
     private static final int OPTIONS_TAB_DISPLAY_ADVANCED_OPTIONS_COMPONENT_ID = 21;
 
     private static final int ADVANCED_OPTIONS_WIDGET_ID = 60;
-    private static final int ADVANCED_OPTIONS_ROOFTOPS_SETTING_COMPONENT_ID = 8;
+    private static final int ADVANCED_OPTIONS_ROOFTOPS_SETTING_COMPONENT_ID = 12;
     private static final int ADVANCED_OPTIONS_MAIN_COMPONENT_ID = 2;
     private static final int ADVANCED_OPTIONS_MAIN_CLOSE_COMPONENT_ID = 11;
 

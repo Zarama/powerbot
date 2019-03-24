@@ -22,7 +22,7 @@ public class Bonfire extends Job<SBonfire, ClientContext> {
         this.id = id;
         this.loc = loc;
         area = new Area(new Tile(loc.x() - 1, loc.y() - 1), new Tile(loc.x() + 2, loc.y() + 2));
-        widget = ctx.widgets.component(1179, 34);
+        widget = ctx.widgets.component(1179, 36);
     }
 
 

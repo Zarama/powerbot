@@ -37,7 +37,7 @@ public class OSGuardSlayer extends PollingScript<ClientContext> implements Paint
     boolean needBank = true;
     boolean canAttack = false;
 
-    GameObject closedDoor = ctx.objects.select().id(6839).nearest().poll();
+    GameObject closedDoor = ctx.objects.select().id(1513).nearest().poll();
 
     Tile castleTile = new Tile(3293, 3174);
     Tile bankTile = new Tile(3269, 3167);
@@ -79,7 +79,7 @@ public class OSGuardSlayer extends PollingScript<ClientContext> implements Paint
         if (ctx.inventory.select().id(foodID).count() <= 0) {
             if (!ctx.movement.reachable(ctx.players.local().tile(), castleTile)) {
                 status = "Status: Opening door!";
-                closedDoor = ctx.objects.select().id(6839).nearest().poll();
+                closedDoor = ctx.objects.select().id(1513).nearest().poll();
                 if (closedDoor.orientation() == 0 && closedDoor.tile().distanceTo(castleTile) <= 13) {
                     closedDoor.bounds(eastDoorBounds);
                     ctx.camera.turnTo(closedDoor);
@@ -308,7 +308,7 @@ public class OSGuardSlayer extends PollingScript<ClientContext> implements Paint
     public void openDoor() {
         if (!guard.tile().matrix(ctx).reachable() && guard.valid()) {
             status = "Status: Opening door!";
-            closedDoor = ctx.objects.select().id(6839).nearest().poll();
+            closedDoor = ctx.objects.select().id(1513).nearest().poll();
             if (closedDoor.orientation() == 0 && closedDoor.tile().distanceTo(castleTile) <= 13) {
                 closedDoor.bounds(eastDoorBounds);
                 ctx.camera.turnTo(closedDoor);

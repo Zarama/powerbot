@@ -1,16 +1,25 @@
 package stumpy3toes.scripts.stumpyisland.gui;
 
-import stumpy3toes.scripts.stumpyisland.AccountType;
-import stumpy3toes.scripts.stumpyisland.tasks.charactercreation.Gender;
-
-import javax.swing.*;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+
+import stumpy3toes.scripts.stumpyisland.AccountType;
+import stumpy3toes.scripts.stumpyisland.tasks.charactercreation.Gender;
 
 public class GUI extends JFrame implements ActionListener, ListDataListener {
     private JPanel contentPanel;
@@ -22,8 +31,8 @@ public class GUI extends JFrame implements ActionListener, ListDataListener {
     private JCheckBox userEnterPin;
 
     private final GUIListener listener;
-    private final DefaultComboBoxModel<String> accountTypeComboBoxModel;
-    private final DefaultComboBoxModel<String> genderChoiceComboBoxModel;
+    private final DefaultComboBoxModel accountTypeComboBoxModel;
+    private final DefaultComboBoxModel genderChoiceComboBoxModel;
 
     private boolean started = false;
 
@@ -32,14 +41,14 @@ public class GUI extends JFrame implements ActionListener, ListDataListener {
 
         this.listener = listener;
 
-        accountTypeComboBoxModel = new DefaultComboBoxModel<String>();
+        accountTypeComboBoxModel = new DefaultComboBoxModel();
         for (AccountType accountType : AccountType.values()) {
             accountTypeComboBoxModel.addElement(accountType.name());
         }
         accountTypeComboBox.setModel(accountTypeComboBoxModel);
         accountTypeComboBoxModel.addListDataListener(this);
 
-        genderChoiceComboBoxModel = new DefaultComboBoxModel<String>();
+        genderChoiceComboBoxModel = new DefaultComboBoxModel();
         for (Gender gender : Gender.values()) {
             genderChoiceComboBoxModel.addElement(gender.name());
         }

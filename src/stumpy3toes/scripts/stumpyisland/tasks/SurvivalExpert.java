@@ -69,7 +69,9 @@ public class SurvivalExpert extends StumpyIslandTask {
                         createFire();
                     } else {
                         setStatus("Cooking shrimp");
-                        ctx.inventory.item(RAW_SHRIMPS_ITEM_ID).use(fire, ctx.checks.animated);
+                        ctx.inventory.item(RAW_SHRIMPS_ITEM_ID).click();
+                        fire.click(false);
+                        fire.interact("Use","Fire");
                     }
                 } else {
                     ctx.players.local().waitForIdle();

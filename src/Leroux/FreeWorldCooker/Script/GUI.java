@@ -1,14 +1,24 @@
 package Leroux.FreeWorldCooker.Script;
 
-import Leroux.FreeWorldCooker.Tasks.*;
-import org.powerbot.script.rt6.ClientContext;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.Arrays;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import Leroux.FreeWorldCooker.Tasks.Cook;
+import Leroux.FreeWorldCooker.Tasks.Deposit;
+import Leroux.FreeWorldCooker.Tasks.Walk_ToBank;
+import Leroux.FreeWorldCooker.Tasks.Walk_ToRange;
+import Leroux.FreeWorldCooker.Tasks.Withdraw;
+import org.powerbot.script.rt6.ClientContext;
 
 public class GUI extends JFrame {
 
@@ -77,6 +87,7 @@ public class GUI extends JFrame {
         });
     }
 
+    @SuppressWarnings("unchecked")
     public void addTasks() {
         FreeWorldCooker.taskList.addAll(Arrays.asList(new Cook(ctx), new Deposit(ctx), new Withdraw(ctx), new Walk_ToBank(ctx), new Walk_ToRange(ctx)));
     }

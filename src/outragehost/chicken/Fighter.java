@@ -1,14 +1,16 @@
 package outragehost.chicken;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.powerbot.script.PaintListener;
 import org.powerbot.script.PollingScript;
 import org.powerbot.script.Script;
 import org.powerbot.script.rt6.ClientContext;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Script.Manifest(
         name = "Outrage Chicken Slayer", properties = "author=Outrage Host; topic=1304601; client=6;",
@@ -32,6 +34,7 @@ public class Fighter extends PollingScript<ClientContext> implements PaintListen
 
     private List<Task> taskList = new ArrayList<Task>();
     @Override
+    @SuppressWarnings("unchecked")
     public void start() {
         taskList.addAll(Arrays.asList(new Gate(ctx), new Chicken(ctx), new Chicken_Feathers(ctx), new Antiban(ctx)));
     }

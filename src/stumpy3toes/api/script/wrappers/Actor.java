@@ -1,13 +1,13 @@
 package stumpy3toes.api.script.wrappers;
 
+import java.awt.Point;
+
 import org.powerbot.script.Condition;
 import org.powerbot.script.Nameable;
 import org.powerbot.script.Tile;
 import org.powerbot.script.Validatable;
 import stumpy3toes.api.script.ClientContext;
 import stumpy3toes.api.script.InteractableEntity;
-
-import java.awt.*;
 
 public class Actor extends InteractableEntity implements Nameable, Validatable {
     private final org.powerbot.script.rt4.Actor actor;
@@ -93,10 +93,12 @@ public class Actor extends InteractableEntity implements Nameable, Validatable {
         return actor.inMotion();
     }
 
+    @SuppressWarnings("deprecation")
     public int health() {
         return actor.health();
     }
 
+    @SuppressWarnings("deprecation")
     public int maxHealth() {
         return actor.maxHealth();
     }
